@@ -90,7 +90,7 @@ Use **Gitmojis** to provide clear, standardized commit messages. Here's a list o
 - `🚀`: Deploying to production
 - `✅`: Adding tests
 
-Example commit message:
+Example commit message :
 ```bash
 git commit -m ":sparkles: add real-time messaging feature"
 ```
