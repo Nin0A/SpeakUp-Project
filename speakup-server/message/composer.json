@@ -1,0 +1,13 @@
+{
+    "name": "api/message",
+    "description": "API for message handling",
+    "require": {
+        "php": "^8.3",
+        "datastax/php-driver": "^1.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "message\\": "./src"
+        }
+    }
+}

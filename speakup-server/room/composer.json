@@ -1,0 +1,13 @@
+{
+    "name": "api/message",
+    "description": "API for room handling",
+    "require": {
+        "php": "^8.3",
+        "illuminate/database": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "room\\": "./src"
+        }
+    }
+}

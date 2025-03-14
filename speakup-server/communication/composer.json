@@ -1,0 +1,12 @@
+{
+    "name": "api/message",
+    "description": "API for communication handling",
+    "require": {
+        "php": "^8.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "communication\\": "./src"
+        }
+    }
+}
