@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use gateway\app\actions\auth\SignInAction;
 use gateway\app\actions\HomeAction;
 use gateway\app\middlewares\CorsMiddleware;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use gateway\app\middlewares\AuthMiddleware;
 // use gateway\application\actions\User\GetUserParamsAction;
 // use gateway\application\actions\Message\GetMessagesAction;
 // use gateway\application\actions\Room\GetRoomsAction;
@@ -19,6 +19,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 return function (\Slim\App $app): \Slim\App {
 
     $app->add(CorsMiddleware::class);
+
+    //HomeAction
+    $app->get('/speakup', HomeAction::class);
+
+    // Authentication
+    $app->post('/register', HomeAction::class);
+    $app->post('/signin', SignInAction::class);
+    $app->get('/validate', HomeAction::class)->add(AuthMiddleware::class);
 
     // // Routes pour le microservice User/Params
     // $app->group('/users', function (\Slim\App $app) {
@@ -35,26 +43,23 @@ return function (\Slim\App $app): \Slim\App {
     //     $app->get('/{userId}/rooms', GetRoomsAction::class);
     // });
 
-    $app->group('/rooms', function (\Slim\App $app) {
-        $app->get('/{roomId}/members', GetRoomMembersAction::class);
-        $app->post('/{roomId}/members', AddRoomMemberAction::class);
-        $app->delete('/{roomId}/members/{userId}', RemoveRoomMemberAction::class);
-        // $app->post('/{roomId}/connect', ConnectToRoomAction::class);
-        // $app->post('/{roomId}/disconnect', DisconnectFromRoomAction::class);
-        // $app->post('/{roomId}/candidate', CandidateRoomAction::class);
-        // $app->post('/{roomId}/answer-offer', AnswerOfferAction::class);
-    });
+    // $app->group('/rooms', function (\Slim\App $app) {
+    // $app->get('/{roomId}/members', GetRoomMembersAction::class);
+    // $app->post('/{roomId}/members', AddRoomMemberAction::class);
+    // $app->delete('/{roomId}/members/{userId}', RemoveRoomMemberAction::class);
+    // $app->post('/{roomId}/connect', ConnectToRoomAction::class);
+    // $app->post('/{roomId}/disconnect', DisconnectFromRoomAction::class);
+    // $app->post('/{roomId}/candidate', CandidateRoomAction::class);
+    // $app->post('/{roomId}/answer-offer', AnswerOfferAction::class);
+    // });
 
     // // Routes pour le microservice Signalisation
     // $app->post('/signal', SignalAction::class);
 
-    //HomeAction
-    $app->get('/speakup', HomeAction::class);
-
     // Route CORS pour les pré-requêtes OPTIONS
-    $app->options('/{routes:.+}', function (Request $request, Response $response) {
-        return $response;
-    });
+    // $app->options('/{routes:.+}', function (Request $request, Response $response) {
+    //     return $response;
+    // });
 
     return $app;
 };

@@ -1,6 +1,9 @@
 <?php
 
+use Psr\Container\ContainerInterface;
 use GuzzleHttp\Client;
+use gateway\app\middlewares\CorsMiddleware;
+use gateway\app\actions\auth\SignInAction;
 
 return [
 
@@ -44,6 +47,10 @@ return [
         return new CorsMiddleware();
     },
 
+    SignInAction::class => function (ContainerInterface $container) {
+        return new SignInAction($container->get('auth_client'));
+    },
+
     // GetUserParamsAction::class => function (ContainerInterface $container) {
     //     return new GetUserParamsAction($container->get('user_client'));
     // },
@@ -56,9 +63,9 @@ return [
     //     return new GetRoomsAction($container->get('room_client'));
     // },
 
-    AddRoomMemberAction::class => function (ContainerInterface $container) {
-        return new AddRoomMemberAction($container->get('room_client'));
-    },
+    // AddRoomMemberAction::class => function (ContainerInterface $container) {
+    //     return new AddRoomMemberAction($container->get('room_client'));
+    // },
 
     // GetRoomMembersAction::class => function (ContainerInterface $container) {
     //     return new GetRoomMembersAction($container->get('room_client'));

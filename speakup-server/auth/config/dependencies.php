@@ -3,9 +3,11 @@
 use auth\app\actions\RegisterAction;
 use auth\app\actions\SignInAction;
 use auth\core\providers\PasswordAuthProvider;
+use auth\app\actions\ValidateAction;
 use auth\core\services\auth\ServiceAuth;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Container\Container;
+use auth\app\middlewares\AuthMiddleware;
 
 return [
 
@@ -48,8 +50,21 @@ return [
         return new RegisterAction($c->get(ServiceAuth::class));
     },
 
+    // Action pour connecter un utilisateur
     SignInAction::class => function ($c) {
         return new SignInAction($c->get(PasswordAuthProvider::class));
+    },
+
+    // Action pour valider un token
+    ValidateAction::class => function ($c) {
+        $jwtSecret = getenv('JWT_SECRET');
+        return new ValidateAction($jwtSecret);
+    },
+
+    // Middleware d'authentification
+    AuthMiddleware::class => function ($c) {
+        $jwtSecret = getenv('JWT_SECRET');
+        return new AuthMiddleware($jwtSecret);
     },
 
 ];
