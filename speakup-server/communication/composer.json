@@ -1,5 +1,5 @@
 {
-    "name": "api/message",
+    "name": "api/communication",
     "description": "API for communication handling",
     "require": {
         "php": "^8.3"

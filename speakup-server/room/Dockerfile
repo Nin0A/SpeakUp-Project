@@ -1,16 +1,13 @@
 FROM php:8.3-cli
 
-# Installer les extensions nécessaires pour Composer
+# Installer les extensions nécessaires pour Composer et PDO
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
     libzip-dev \
-    && docker-php-ext-install zip
-
-# Installer PostgreSQL PDO
-RUN apt-get update && apt-get install -y \
     libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql
+    default-mysql-client \
+    && docker-php-ext-install zip pdo pdo_mysql pdo_pgsql
 
 WORKDIR /var/php
 
