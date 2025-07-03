@@ -1,0 +1,88 @@
+
+@import './variables.scss';
+.auth-bg {
+    min-height: 100vh;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-card {
+    background: #fff;
+    border-radius: $card-radius;
+    border: 1px solid $gray-border;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem 2rem 2rem 2rem;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.auth-title {
+    text-align: left;
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+    color: $gray-label;
+}
+
+.auth-label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    margin-top: 1rem;
+    color: $gray-label;
+    font-size: 1.1rem;
+}
+
+.auth-input {
+    border: 1.5px solid $gray-border;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    outline: none;
+    background: #fff;
+    color: $gray-label;
+
+    &::placeholder {
+        color: $gray-placeholder;
+        opacity: 1;
+    }
+}
+
+.auth-input:focus {
+    border: 1.5px solid $yellow;
+}
+
+.auth-btn {
+    margin-top: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: $yellow;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.8rem 0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.auth-btn:hover {
+    background: $yellow-hover;
+}
+
+.auth-switch,
+.auth-link {
+    margin-top: 1.2rem;
+    text-align: left;
+    color: $gray-link;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: underline;
+    padding: 0;
+}
