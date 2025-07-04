@@ -1,4 +1,4 @@
-FROM golang:stretch
+FROM golang:1.21
 
 WORKDIR $GOPATH/src/github.com/pion/ion-sfu
 
