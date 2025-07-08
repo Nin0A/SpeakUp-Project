@@ -33,6 +33,7 @@ const selectedChannel = ref('work');
 const message = ref('');
 const messages = ref([...mockMessages]);
 const videoCallSection = ref(null);
+const hasVideo = ref(false);
 
 const onlineUsers = computed(() => mockUsers.filter(u => u.online));
 const offlineUsers = computed(() => mockUsers.filter(u => !u.online));
@@ -51,12 +52,14 @@ function sendMessage() {
 function startPublish(type) {
   if (videoCallSection.value) {
     videoCallSection.value.startPublish(type);
+    hasVideo.value = true;
   }
 }
 
 function stopPublish() {
   if (videoCallSection.value) {
     videoCallSection.value.stopPublish();
+    hasVideo.value = false;
   }
 }
 
@@ -83,16 +86,20 @@ function stopPublish() {
       </div>
     </div>
     <div :class="styles['communication-area']">
+        <div :class="styles['dashboard-header']">
+          <div :class="styles['dashboard-main-title']"># {{ selectedChannel }}</div>
+          <Header v-if="!hasVideo" @start-publish="startPublish" @stop-publish="stopPublish" />
+        </div>
+
         <!-- Videocall area -->
         <div :class="styles['container-video-header']">
-            <Header @start-publish="startPublish" @stop-publish="stopPublish" />
-            <div  :class="styles['container-videocall']">
+            <div :class="styles['container-videocall']">
                 <VideoCallSection ref="videoCallSection" />
             </div>
+            <Header v-if="hasVideo" @start-publish="startPublish" @stop-publish="stopPublish" />
         </div>
         <!-- Main chat area -->
         <div :class="styles['dashboard-main']">
-        <div :class="styles['dashboard-main-title']"># {{ selectedChannel }}</div>
         <div :class="styles['dashboard-messages']">
             <div
                 v-for="(msg, idx) in messages"
