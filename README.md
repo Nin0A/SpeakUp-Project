@@ -9,6 +9,25 @@
 
 ---
 
+### Starting the Project
+
+To start the project, follow these simple steps:
+
+**Run the deployment script**: Open a terminal and run the deployment script using the following command:
+
+```bash
+./deploy.sh
+```
+
+**Access the application**: Once the script has been successfully executed, open your web browser and access the application by entering the following URL:
+
+```bash
+http://localhost:8080
+```
+
+---
+
+
 ### 🛠️ Technologies Used
 - **Backend**: PHP, Eloquent, Slim
 - **Frontend**: Vue.js, SCSS, HTML5
